@@ -1,9 +1,13 @@
 //------------SETTINGS---------------
 
-require('../config/config');
-
-const express = require('express')
-const app = express()
+require('./config/config');
+//Express
+const express = require('express');
+const app = express();
+//Mongoose
+const mongoose = require('mongoose');
+//colors
+const colors = require('colors');
 
 
 //body parser
@@ -15,31 +19,15 @@ app.use(bodyParser.json())
 
 //--------------------------------------
 
+//app uses user routes
+app.use(require('./routes/usuario'));
 
-//GET
-app.get('/usuario', function(req, res) {
-    res.json('get Usuarios');
-});
 
-//POST
-app.post('/usuario', function(req, res) {
-    let body = req.body;
-    res.json({
-        persona: body
-    });
-});
 
-//PUT
-app.put('/usuario/:id', function(req, res) {
-    let id = req.params.id;
-    res.json({
-        id
-    });
-});
-
-//DELETE
-app.delete('/usuario', function(req, res) {
-    res.json('delete Usuarios');
+//connect to database
+mongoose.connect(process.env.URLDB, (err, res) => {
+    if (err) throw err;
+    console.log('Base de datos ONLINE'.green);
 });
 
 //Listen to port
