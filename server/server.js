@@ -20,12 +20,13 @@ app.use(bodyParser.json())
 //--------------------------------------
 
 //app uses user routes
-app.use(require('./routes/usuario'));
+
+app.use(require('./routes/index'));
 
 
 
 //connect to database
-mongoose.connect(process.env.URLDB, (err, res) => {
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
     if (err) throw err;
     console.log('Base de datos ONLINE'.green);
 });
