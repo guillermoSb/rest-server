@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 //colors
 const colors = require('colors');
 
-
+const path = require('path');
 //body parser
 const bodyParser = require('body-parser')
     // parse application/x-www-form-urlencoded
@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
     // parse application/json
 app.use(bodyParser.json())
 
+//hablitar public
+app.use(express.static(path.resolve(__dirname, '../public')));
 //--------------------------------------
 
 //app uses user routes
